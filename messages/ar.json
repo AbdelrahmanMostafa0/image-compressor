@@ -2,5 +2,8 @@
   "HomePage": {
     "title": "مرحبا بالعالم!",
     "about": "Go to the about page"
+  },
+  "form": {
+    "required": "يرجى رفع صورة"
   }
 }

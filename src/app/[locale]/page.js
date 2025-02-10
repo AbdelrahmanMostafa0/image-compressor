@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import ImageForm from "@/components/ImageForm";
 
 export const metadata = {
   title: "Image Compressor",
@@ -6,10 +6,9 @@ export const metadata = {
 };
 
 export default function Home() {
-  const t = useTranslations("HomePage");
   return (
-    <div className="">
-      <h1>{t("title")}</h1>
+    <div className=" h-dvh ">
+      <ImageForm />
     </div>
   );
 }
