@@ -47,11 +47,11 @@ The **Image Compressor** is a lightweight web application that allows users to c
 
 <!-- ## Contributing
 Contributions are welcome! Feel free to open issues or submit pull requests to improve the project. -->
-
+<!-- 
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
+-->
 <!--
 
 Stay tuned for more updates as the project evolves! -->
