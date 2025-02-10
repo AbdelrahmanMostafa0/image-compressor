@@ -2,8 +2,8 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
-
-const Navbar = () => {
+import { motion } from "motion/react";
+const ThemeChanger = () => {
   const [darkMode, setDarkMode] = useState(false);
   useEffect(() => {
     // Sync with user's system preferences or saved preference
@@ -33,10 +33,22 @@ const Navbar = () => {
   return (
     <button
       onClick={toggleDarkMode}
-      className="absolute bottom-5 text-black dark:text-white right-5  h-12 w-12 rounded-full flex items-center justify-center bg-white dark:shadow-white dark:bg-slate-950 drop-shadow-lg"
+      className="absolute bottom-5 text-black dark:text-white right-5  h-12 w-12 rounded-full flex items-center justify-center bg-lightMode-background  dark:bg-darkMode-background drop-shadow-lg"
     >
-      {darkMode ? <Sun /> : <Moon />}
+      {darkMode ? (
+        <motion.div
+          initial={{ rotate: 0 }}
+          animate={{ rotate: 90 }}
+          transition={{ duration: 0.5, repeatType: "reverse" }}
+        >
+          <Sun />
+        </motion.div>
+      ) : (
+        <motion.div>
+          <Moon />
+        </motion.div>
+      )}
     </button>
   );
 };
-export default Navbar;
+export default ThemeChanger;
