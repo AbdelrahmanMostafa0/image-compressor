@@ -9,10 +9,20 @@ export const settingSlice = createSlice({
   name: "settings",
   initialState,
   reducers: {
-    updateSetting(state) {
-      state.quality = 0.5;
+    updateSettingQuality(state, action) {
+      state.quality = action.payload;
+    },
+    updateSettingMaxSizeMB(state, action) {
+      state.maxSizeMB = action.payload;
+    },
+    updateSettingMaxWidthOrHeight(state, action) {
+      state.maxWidthOrHeight = action.payload;
     },
   },
 });
-export const { updateSetting } = settingSlice.actions;
+export const {
+  updateSettingMaxWidthOrHeight,
+  updateSettingQuality,
+  updateSettingMaxSizeMB,
+} = settingSlice.actions;
 export default settingSlice.reducer;

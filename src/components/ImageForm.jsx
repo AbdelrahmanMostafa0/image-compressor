@@ -7,6 +7,7 @@ import RenderImage from "./RenderImage";
 import UploadBtn from "./UploadBtn";
 import { store } from "@/store/store";
 import { Provider } from "react-redux";
+import CompressedImageSettings from "./CompressedImageSettings";
 
 const ImageForm = () => {
   const {
@@ -59,6 +60,7 @@ const ImageForm = () => {
             <RenderImage image={watch("image")} setValue={setValue} />
             {!watch("image") && <UploadBtn openGallery={openGallery} />}
           </div>
+          <CompressedImageSettings />
         </div>
       </div>
     </Provider>
