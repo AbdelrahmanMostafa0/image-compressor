@@ -35,7 +35,7 @@ const CompressedImageSettings = ({ onCompress, watch }) => {
             max={99}
           />
         </div>
-        <div className="space-y-1 w-full">
+        <div className="space-y-1 w-full flex justify-between flex-col">
           <label
             htmlFor="max-size"
             className="text-lightMode-primary dark:text-darkMode-primary"
@@ -52,7 +52,7 @@ const CompressedImageSettings = ({ onCompress, watch }) => {
                 dispatch(updateSettingMaxSizeMB(value));
               }}
               placeholder="Max size in MB"
-              className="rounded-md  px-3  w-full border outline-none h-7 "
+              className="rounded-md  px-3  w-full border outline-none h-8 border-slate-300"
             />
             <span className="text-gray-400 -mx-10">MB</span>
           </div>

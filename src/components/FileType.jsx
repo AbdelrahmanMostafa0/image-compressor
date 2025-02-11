@@ -29,23 +29,28 @@ const FileType = ({ watch }) => {
   useEffect(() => {
     if (watch("image")) {
       const type = getFileType();
-
       dispatch(updateSettingImageFormat(type));
     }
   }, [watch("image")]);
   const toggleMenu = () => setIsOpen((prev) => !prev);
   return (
-    <div className="flex flex-col justify-between w-full">
-      <p>image Format</p>
+    <div className="flex flex-col justify-between gap-1 w-full">
+      <p className="text-lightMode-primary dark:text-darkMode-primary">
+        image Format
+      </p>
       <div ref={menuRef} className="relative ">
         <button
           onClick={toggleMenu}
-          className="w-full border p-2 rounded-md flex items-center justify-between h-7"
+          className="w-full  px-2 rounded-md flex items-center justify-between h-8 border-slate-300 border bg-white text-lightMode-primary"
         >
-          <span> {settings.imageFormat.split("/")[1]}</span> <ChevronDown />
+          <span className="font-medium">
+            {" "}
+            {settings.imageFormat.split("/")[1]}
+          </span>{" "}
+          <ChevronDown className={`${isOpen && "rotate-180 "} duration-150`} />
         </button>
         {isOpen && (
-          <div className="w-full absolute  border bg-white drop-shadow-md">
+          <div className="w-full absolute  border z-[5] rounded-md mt-1 bg-white drop-shadow-md">
             {fileTypes.map((type, i, types) => {
               const last = i + 1 === types.length;
               return (
