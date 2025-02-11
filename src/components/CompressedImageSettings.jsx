@@ -6,16 +6,16 @@ import {
 } from "@/store/features/settingSlice";
 import { removeNoneNumricValues } from "@/utils/handleNumberInput";
 import { useDispatch, useSelector } from "react-redux";
+import FileType from "./FileType";
 
-const CompressedImageSettings = ({ onCompress }) => {
+const CompressedImageSettings = ({ onCompress, watch }) => {
   const settings = useSelector((state) => state.settings);
   const dispatch = useDispatch();
-  console.log(settings);
 
   return (
     <div className="space-y-4">
-      <div className="grid md:grid-cols-2 md:max-w-[50%] mx-auto gap-5">
-        <div className="space-y-1 flex flex-col justify-between">
+      <div className="grid md:grid-cols-3 md:max-w-[800px] mx-auto gap-5 justify-items-center">
+        <div className="space-y-1 flex flex-col justify-between w-full">
           <label
             htmlFor="max-size "
             className="text-lightMode-primary dark:text-darkMode-primary"
@@ -30,33 +30,34 @@ const CompressedImageSettings = ({ onCompress }) => {
             defaultValue={settings.quality ? settings.quality * 100 : 75}
             onChange={(e) => {
               dispatch(updateSettingQuality(e.target.value / 100));
-              console.log(e.target.value);
             }}
             min={10}
             max={99}
           />
         </div>
-        <div className="space-y-1">
+        <div className="space-y-1 w-full">
           <label
             htmlFor="max-size"
             className="text-lightMode-primary dark:text-darkMode-primary"
           >
             Max Size in MB
           </label>
-          <input
-            inputMode="numeric"
-            type="text"
-            value={settings.maxSizeMB || ""}
-            onChange={(e) => {
-              const value = removeNoneNumricValues(e.target.value);
-              console.log("value===>", value);
-
-              dispatch(updateSettingMaxSizeMB(value));
-            }}
-            placeholder="Max size in MB"
-            className="rounded-md  px-3  border outline-none "
-          />
+          <div className="w-full flex items-center ">
+            <input
+              inputMode="numeric"
+              type="text"
+              value={settings.maxSizeMB || ""}
+              onChange={(e) => {
+                const value = removeNoneNumricValues(e.target.value);
+                dispatch(updateSettingMaxSizeMB(value));
+              }}
+              placeholder="Max size in MB"
+              className="rounded-md  px-3  w-full border outline-none h-7 "
+            />
+            <span className="text-gray-400 -mx-10">MB</span>
+          </div>
         </div>
+        <FileType watch={watch} />
       </div>
       <div className="flex justify-center">
         <button

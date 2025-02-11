@@ -35,6 +35,7 @@ const ImageForm = () => {
       file: watch("image"),
       maxSizeMB: settings.maxSizeMB,
       quality: settings.quality,
+      fileType: settings.imageFormat,
     });
     setLoading(false);
 
@@ -83,7 +84,10 @@ const ImageForm = () => {
           {!watch("image") && <UploadBtn openGallery={openGallery} />}
         </div>
         {watch("image") && (
-          <CompressedImageSettings onCompress={CreateCompressedImage} />
+          <CompressedImageSettings
+            watch={watch}
+            onCompress={CreateCompressedImage}
+          />
         )}
         {loading && <div className="text-center">Loading...</div>}
         {watch("compressedImage") && <CompressedImage watch={watch} />}
