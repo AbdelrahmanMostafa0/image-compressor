@@ -33,7 +33,7 @@ const ThemeChanger = () => {
   return (
     <button
       onClick={toggleDarkMode}
-      className="absolute bottom-5 text-black dark:text-white right-5  h-12 w-12 rounded-full flex items-center justify-center bg-lightMode-background  dark:bg-darkMode-background drop-shadow-lg"
+      className="fixed z-10 bottom-5 text-black dark:text-white right-5  h-12 w-12 rounded-full flex items-center justify-center bg-lightMode-background  dark:bg-darkMode-background drop-shadow-lg"
     >
       {darkMode ? (
         <motion.div

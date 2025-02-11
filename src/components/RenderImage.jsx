@@ -1,8 +1,8 @@
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
 
-const RenderImage = ({ image, setValue }) => {
-  const deleteCurrentImage = () => setValue("image", "");
+const RenderImage = ({ image, setValue, reset }) => {
+  const deleteCurrentImage = () => reset();
   if (image) {
     return (
       <div className="relative w-fit mx-auto">

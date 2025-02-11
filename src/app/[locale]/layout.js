@@ -6,7 +6,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import LocaleSwitcher from "@/components/LocakeSwitcher";
+import LocaleSwitcher from "@/components/LocaleSwitcher";
+import ReduxProvider from "@/components/providers/ReduxProvider";
 
 export default async function LocaleLayout({ children, params }) {
   // Ensure `params` is awaited if necessary
@@ -23,12 +24,14 @@ export default async function LocaleLayout({ children, params }) {
   return (
     <html lang={locale}>
       <body className="dark:bg-darkMode-websiteBackground bg-lightMode-websiteBackground">
-        <NextIntlClientProvider messages={messages}>
-          <LocaleSwitcher currentLocale={locale} />
-          {children}
+        <ReduxProvider>
+          <NextIntlClientProvider messages={messages}>
+            <LocaleSwitcher currentLocale={locale} />
+            {children}
 
-          <ThemeChanger />
-        </NextIntlClientProvider>
+            <ThemeChanger />
+          </NextIntlClientProvider>
+        </ReduxProvider>{" "}
       </body>
     </html>
   );
