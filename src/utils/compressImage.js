@@ -7,14 +7,12 @@ export const compressImage = async ({
   quality = 0.75,
   fileType,
 }) => {
-  console.log("fileType", fileType);
-
   const options = {
     maxSizeMB,
     maxWidthOrHeight,
     quality,
     useWebWorker: true,
-    fileType,
+    fileType: fileType === "image/jpg" ? "image/jpeg" : fileType,
   };
   try {
     const compressedFile = await imageCompression(file, options);

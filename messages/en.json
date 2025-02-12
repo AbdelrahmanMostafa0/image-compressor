@@ -1,4 +1,8 @@
 {
   "title": "Squash it!",
-  "uploadImage": "Upload Image"
+  "uploadImage": "Upload Image",
+  "ImageQuality": "Image Quality",
+  "ImageFormat": "Image Format",
+  "SquashIt": "Squash it",
+  "MaxSize": "Max Size In MB"
 }

@@ -1,4 +1,8 @@
 {
   "title": "إكبسها",
-  "uploadImage": "ارفع صورة"
+  "uploadImage": "ارفع صورة",
+  "ImageQuality": "جودة الصورة",
+  "ImageFormat": "صيغة الصورة",
+  "SquashIt": "إكبسها",
+  "MaxSize": "أقصى حجم بالميجابايت"
 }

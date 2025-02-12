@@ -2,6 +2,7 @@
 
 import { updateSettingImageFormat } from "@/store/features/settingSlice";
 import { ChevronDown } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,6 +10,7 @@ const fileTypes = ["jpg", "png", "webp"];
 
 const FileType = ({ watch }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const t = useTranslations();
   const menuRef = useRef(null);
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
@@ -36,7 +38,7 @@ const FileType = ({ watch }) => {
   return (
     <div className="flex flex-col justify-between gap-1 w-full">
       <p className="text-lightMode-primary dark:text-darkMode-primary">
-        image Format
+        {t("ImageFormat")}
       </p>
       <div ref={menuRef} className="relative ">
         <button

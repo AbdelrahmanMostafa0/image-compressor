@@ -1,7 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import RenderImage from "./RenderImage";
 import UploadBtn from "./UploadBtn";
@@ -10,20 +10,24 @@ import { Provider, useSelector } from "react-redux";
 import CompressedImageSettings from "./CompressedImageSettings";
 import { compressImage } from "@/utils/compressImage";
 import CompressedImage from "./CompressedImage";
+import ImageLoading from "./ImageLoading";
 
-const ImageForm = () => {
+const ImageForm = ({ locale }) => {
   const settings = useSelector((state) => state.settings);
   const [loading, setLoading] = useState(false);
+  const [ImageHieght, setImageHieght] = useState(0);
+  const [imageWidth, setImageWidth] = useState(0);
 
   const {
     register,
     reset,
     watch,
-    formState: { errors, isSubmitting, isLoading, isSubmitSuccessful },
+    formState: { errors },
     setValue,
     clearErrors,
   } = useForm();
   const imageInputRef = useRef(null);
+  const imageContainerRef = useRef(null);
   const t = useTranslations("");
   const openGallery = () => {
     imageInputRef.current.click();
@@ -44,6 +48,35 @@ const ImageForm = () => {
     }
   };
 
+  useEffect(() => {
+    const selectedImage = watch("image");
+
+    if (selectedImage) {
+      // Ensure file is present
+      const imageUrl = selectedImage ? URL.createObjectURL(selectedImage) : "";
+      const img = new window.Image();
+
+      img.onload = function () {
+        setImageHieght(img.height);
+        setImageWidth(img.width);
+
+        URL.revokeObjectURL(imageUrl);
+      };
+      img.src = imageUrl;
+    }
+  }, [watch("image")]);
+  const handleReset = () => {
+    reset();
+    setValue("image", null);
+  };
+  useEffect(() => {
+    if (loading) {
+      imageContainerRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [loading]);
   return (
     <div className="container mx-auto flex items-center justify-center flex-col min-h-dvh py-12 sm:px-0 px-5 space-y-4 sm:space-y-8">
       {" "}
@@ -56,19 +89,14 @@ const ImageForm = () => {
           hidden
           ref={imageInputRef}
           onChange={(e) => {
-            setValue("image", e.target.files[0]);
+            const file = e.target.files[0];
+
+            setValue("image", file);
           }}
           type="file"
           accept="image/*"
         />
-        <input
-          type="text"
-          hidden
-          {...register("image", {
-            // required: t("form.required"),
-            // validate: (value) => value?.type?.startsWith("image/"),
-          })}
-        />
+
         {errors.image && (
           <p className="dark:text-darkMode-red text-lightMode-red">
             {errors.image.message}
@@ -78,19 +106,25 @@ const ImageForm = () => {
         <div className="space-y-5">
           <RenderImage
             image={watch("image")}
-            reset={reset}
+            reset={handleReset}
             setValue={setValue}
           />
           {!watch("image") && <UploadBtn openGallery={openGallery} />}
         </div>
         {watch("image") && (
           <CompressedImageSettings
+            loading={loading}
+            locale={locale}
             watch={watch}
             onCompress={CreateCompressedImage}
           />
         )}
-        {loading && <div className="text-center">Loading...</div>}
-        {watch("compressedImage") && <CompressedImage watch={watch} />}
+        <div ref={imageContainerRef}>
+          {loading && <ImageLoading width={imageWidth} hieght={ImageHieght} />}
+          {!loading && watch("compressedImage") && (
+            <CompressedImage watch={watch} />
+          )}
+        </div>
       </div>
     </div>
   );

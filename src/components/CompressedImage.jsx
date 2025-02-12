@@ -1,11 +1,8 @@
 import { Download } from "lucide-react";
 
 const CompressedImage = ({ watch }) => {
-  console.log(watch("compressedImage"));
-
   const imageUrl = URL.createObjectURL(watch("compressedImage"));
   const imageName = watch("compressedImage").name.split(".")[0] + " compressed";
-  console.log();
 
   return (
     <div className="relative w-fit mx-auto">
