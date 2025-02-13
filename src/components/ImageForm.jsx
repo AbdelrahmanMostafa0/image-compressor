@@ -11,6 +11,7 @@ import CompressedImageSettings from "./CompressedImageSettings";
 import { compressImage } from "@/utils/compressImage";
 import CompressedImage from "./CompressedImage";
 import ImageLoading from "./ImageLoading";
+import ElementContainer from "./ElementContainer";
 
 const ImageForm = ({ locale }) => {
   const settings = useSelector((state) => state.settings);
@@ -79,10 +80,11 @@ const ImageForm = ({ locale }) => {
   }, [loading]);
   return (
     <div className="container mx-auto flex items-center justify-center flex-col min-h-dvh py-12 sm:px-0 px-5 space-y-4 sm:space-y-8">
-      {" "}
-      <h1 className="text-5xl text-center  dark:text-darkMode-primary text-lightMode-primary font-bold">
-        {t("title")}
-      </h1>
+      <ElementContainer>
+        <h1 className="text-5xl text-center  dark:text-darkMode-primary text-lightMode-primary font-bold">
+          {t("title")}
+        </h1>
+      </ElementContainer>
       <div className="w-full md:max-w-[80%] bg-lightMode-background dark:bg-darkMode-background p-5 sm:p-10 space-y-5 rounded-lg">
         {/* <button onClick={openGallery}>Upload</button> */}
         <input

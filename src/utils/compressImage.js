@@ -8,9 +8,11 @@ export const compressImage = async ({
   fileType,
 }) => {
   const options = {
-    maxSizeMB,
-    maxWidthOrHeight,
-    quality,
+    maxSizeMB: isNaN(maxSizeMB) ? 1 : parseInt(maxSizeMB),
+    maxWidthOrHeight: isNaN(maxWidthOrHeight)
+      ? 1000
+      : parseInt(maxWidthOrHeight),
+    quality: isNaN(quality) ? 1 : parseInt(quality),
     useWebWorker: true,
     fileType: fileType === "image/jpg" ? "image/jpeg" : fileType,
   };

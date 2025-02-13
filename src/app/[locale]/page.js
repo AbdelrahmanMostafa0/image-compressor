@@ -1,3 +1,4 @@
+import ElementContainer from "@/components/ElementContainer";
 import ImageForm from "@/components/ImageForm";
 
 // export const metadata = {
@@ -26,7 +27,9 @@ export default async function Home({ params }) {
 
   return (
     <div className=" h-dvh ">
+      {/* <ElementContainer> */}
       <ImageForm locale={locale} />
+      {/* </ElementContainer> */}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
+import ElementContainer from "./ElementContainer";
 
 const RenderImage = ({ image, setValue, reset }) => {
   const deleteCurrentImage = () => reset();
@@ -22,15 +23,17 @@ const RenderImage = ({ image, setValue, reset }) => {
     );
   } else {
     return (
-      <div className="h-[200px] md:h-[500px] justify-center items-center flex">
-        <Image
-          src={"/upload-image.png"}
-          alt="image to compress"
-          width={1000}
-          height={600}
-          className="w-fit max-h-[600px]"
-        />
-      </div>
+      <ElementContainer delay={0.2}>
+        <div className="h-[200px] md:h-[500px] justify-center items-center flex">
+          <Image
+            src={"/upload-image.png"}
+            alt="image to compress"
+            width={1000}
+            height={600}
+            className="w-fit max-h-[600px]"
+          />
+        </div>
+      </ElementContainer>
     );
   }
 };
